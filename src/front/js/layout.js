@@ -2,7 +2,9 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
+import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
+import Private from "./pages/Private.jsx";
 
 import injectContext from "./store/appContext";
 
@@ -21,10 +23,15 @@ const Layout = () => {
         <ScrollToTop>
           <Navbar />
           <Switch>
+            <Route exact path="/register">
+              <Register />
+            </Route>
             <Route exact path="/login">
               <Login />
             </Route>
-
+            <Route exact path="/private">
+              <Private />
+            </Route>
             <Route>
               <h1>Not found!</h1>
             </Route>

@@ -30,7 +30,7 @@ def post_user():
     db.session.commit()
     return jsonify(new_user.serialize()), 201
 
-@api.route('user/login', methods=['POST'])
+@api.route('/login', methods=['POST'])
 def login_user():
     body = request.get_json(force=True)
     user = db.session.query(User).filter(User.email == body['email']).first()
@@ -45,6 +45,5 @@ def login_user():
 @jwt_required()
 def private():
     user_token=get_jwt_identity()
-    print(user_token)
     user=User.query.get(user_token)
     return jsonify(user.serialize()),200
