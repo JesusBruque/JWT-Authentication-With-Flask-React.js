@@ -58,6 +58,7 @@ def sitemap():
     return send_from_directory(static_file_dir, 'index.html')
 
 # any other endpoint will try to serve it like a static file
+
 @app.route('/<path:path>', methods=['GET'])
 def serve_any_other_file(path):
     if not os.path.isfile(os.path.join(static_file_dir, path)):
@@ -65,34 +66,6 @@ def serve_any_other_file(path):
     response = send_from_directory(static_file_dir, path)
     response.cache_control.max_age = 0 # avoid cache memory
     return response
-
-@app.route('/user/signup', methods=['POST'])
-def post_user():
-    body = request.get_json()
-    new_user = User(email=body['email'], password=body['password'], is_active=True)
-    db.session.add(new_user)
-    db.session.commit()
-
-    return jsonify(new_user.serialize()), 201
-
-@app.route('/user/login', methods=['POST'])
-def login_user():
-    body = request.get_json()
-    user = db.session.query(User).filter(User.email == body['email'])[0]
-    if user.password == body['password']:
-        access_token = create_access_token(identity=user.id)
-        return jsonify(access_token), 200
-    else:
-        return jsonify('Error user not exist'), 401
-
-    return jsonify(user.serialize()), 200
-
-@app.route('/user/private', methods=['GET'])
-def get_user():
-    response_body={
-        'msg': 'Hola'
-    } 
-    return jsonify(response_body), 200
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
