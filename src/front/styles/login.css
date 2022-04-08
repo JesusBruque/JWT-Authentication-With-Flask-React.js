@@ -1,0 +1,34 @@
+.login-container {
+  background-color: rgb(116, 116, 221);
+  width: 40%;
+  color: white;
+}
+
+.title {
+  text-align: center;
+  font-size: 150%;
+  font-weight: bold;
+}
+
+.form-control {
+  width: 80%;
+  background-color: rgb(158, 158, 225);
+  margin: 20px;
+}
+
+input {
+  width: 80%;
+  background-color: rgb(158, 158, 225);
+  margin: 20px;
+}
+
+.login-button {
+  background-color: #0a3545;
+  margin: 20px;
+  color: white;
+  font-weight: 400;
+  width: 30%;
+  height: 45px;
+  border-radius: 5px;
+  border: solid 2px white;
+}
