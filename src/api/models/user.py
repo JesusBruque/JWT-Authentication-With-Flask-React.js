@@ -6,7 +6,9 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
-    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+    nickname = db.Column(db.String(120), unique=True, nullable=False)
+    role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
+    role = db.relationship(Role, backref='user')
 
     def __repr__(self):
         return '<User %r>' % self.User
@@ -15,5 +17,7 @@ class User(db.Model):
         return {
             "id": self.id,
             "email": self.email,
+            "nickname": self.nickname,
+            "role_id": self.role_id
             # do not serialize the password, its a security breach
         }
